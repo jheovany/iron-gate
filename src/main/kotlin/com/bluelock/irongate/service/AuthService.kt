@@ -11,11 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
 
 @Service
-class AuthenticationService(
+class AuthService(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
     private val jwtService: JwtService,
@@ -79,7 +77,7 @@ class AuthenticationService(
         )
     }
 
-    fun refreshToken(request: TokenRefreshRequest): TokenRefreshResponse {
+    fun refreshToken(request: RefreshTokenRequest): RefreshTokenResponse {
         val refreshToken = refreshTokenService.findByToken(request.refreshToken)
             ?: throw TokenRefreshException(request.refreshToken, "Refresh token no encontrado")
 
@@ -91,7 +89,7 @@ class AuthenticationService(
         // Rotar el refresh token por seguridad
         val newRefreshToken = refreshTokenService.rotateRefreshToken(refreshToken)
 
-        return TokenRefreshResponse(
+        return RefreshTokenResponse(
             accessToken = newAccessToken,
             refreshToken = newRefreshToken.token,
             expiresIn = accessTokenExpiration / 1000

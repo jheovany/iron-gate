@@ -22,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 class SecurityConfiguration(
     private val jwtAuthFilter: JwtAuthenticationFilter,
     private val userDetailsService: UserDetailsServiceImpl,
-    private val authenticationEntryPoint: AuthenticationEntryPointImpl,
+    private val authenticationEntryPoint: AuthEntryPointImpl,
     private val accessDeniedHandler: AccessDeniedHandlerImpl
 ) {
     @Bean

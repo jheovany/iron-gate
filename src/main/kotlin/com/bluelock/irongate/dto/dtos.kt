@@ -37,11 +37,6 @@ data class AuthenticationRequest(
     val password: String
 )
 
-data class RefreshTokenRequest(
-    @field:NotBlank(message = "El refresh token es requerido")
-    val refreshToken: String
-)
-
 // Response DTOs
 data class AuthenticationResponse(
     val accessToken: String,

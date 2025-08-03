@@ -2,21 +2,17 @@ package com.bluelock.irongate.controller
 
 import com.bluelock.irongate.dto.*
 import com.bluelock.irongate.security.UserDetailsImpl
-import com.bluelock.irongate.service.AuthenticationService
-import com.bluelock.irongate.service.UserService
-import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import com.bluelock.irongate.service.AuthService
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/auth")
-class AuthenticationController(
-    private val authenticationService: AuthenticationService
+class AuthController(
+    private val authenticationService: AuthService
 ) {
     @PostMapping("/register")
     fun register(
@@ -44,8 +40,8 @@ class AuthenticationController(
 
     @PostMapping("/refresh-token")
     fun refreshToken(
-        @Valid @RequestBody request: TokenRefreshRequest
-    ): ResponseEntity<TokenRefreshResponse> {
+        @Valid @RequestBody request: RefreshTokenRequest
+    ): ResponseEntity<RefreshTokenResponse> {
         return try {
             val response = authenticationService.refreshToken(request)
             ResponseEntity.ok(response)
