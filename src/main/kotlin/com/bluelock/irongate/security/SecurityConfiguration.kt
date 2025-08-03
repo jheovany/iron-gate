@@ -21,7 +21,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @EnableMethodSecurity
 class SecurityConfiguration(
     private val jwtAuthFilter: JwtAuthenticationFilter,
-    private val userDetailsService: UserDetailsServiceImpl
+    private val userDetailsService: UserDetailsServiceImpl,
+    private val authenticationEntryPoint: AuthenticationEntryPointImpl,
+    private val accessDeniedHandler: AccessDeniedHandlerImpl
 ) {
     @Bean
     fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager {
@@ -41,6 +43,10 @@ class SecurityConfiguration(
             .cors { it.configurationSource(corsConfigurationSource()) }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .exceptionHandling {
+                it.authenticationEntryPoint(authenticationEntryPoint)
+                it.accessDeniedHandler(accessDeniedHandler)
+            }
             .authorizeHttpRequests { auth ->
                 auth
                     .requestMatchers(
