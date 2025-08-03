@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: Iron Gate
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/irongate
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:admin123}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: ${JWT_EXPIRATION:86400000} # 24 horas en millisegundos
+      refresh-token:
+        expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 días en millisegundos
