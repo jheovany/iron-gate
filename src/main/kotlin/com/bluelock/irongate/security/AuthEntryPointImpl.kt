@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
 @Component
-class AuthenticationEntryPointImpl(
+class AuthEntryPointImpl(
     private val objectMapper: ObjectMapper
 ) : AuthenticationEntryPoint {
     override fun commence(

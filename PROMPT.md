@@ -15,6 +15,7 @@ Especificaciones:
 - Implementa 'UserDetails' como 'UserDetailsImpl'
 - UserDetailsImpl debe recibir un objeto 'User' y debe implementar los metodos de UserDetails
 - Implementa refresh token
+- Implementa Roles de usuario (USER, ADMIN, MODERATOR)
 
 - Entidad 'User':
 ```kotlin
