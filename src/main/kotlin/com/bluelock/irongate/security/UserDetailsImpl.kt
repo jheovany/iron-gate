@@ -20,7 +20,7 @@ class UserDetailsImpl(
     
     override fun getPassword(): String = user.password
     
-    override fun getUsername(): String = user.email
+    override fun getUsername(): String = user.username
     
     override fun isAccountNonExpired(): Boolean = user.isAccountNonExpired
     

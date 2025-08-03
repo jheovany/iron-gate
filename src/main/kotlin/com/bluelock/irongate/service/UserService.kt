@@ -41,6 +41,7 @@ class UserService(
         val user = getCurrentUser(authentication)
         return UserResponse(
             id = user.id,
+            username = user.username,
             email = user.email,
             firstName = user.firstName,
             lastName = user.lastName,
@@ -66,6 +67,7 @@ class UserService(
         
         return UserResponse(
             id = savedUser.id,
+            username = savedUser.username,
             email = savedUser.email,
             firstName = savedUser.firstName,
             lastName = savedUser.lastName,
@@ -104,6 +106,7 @@ class UserService(
         
         return UserResponse(
             id = savedUser.id,
+            username = savedUser.username,
             email = savedUser.email,
             firstName = savedUser.firstName,
             lastName = savedUser.lastName,
@@ -120,6 +123,7 @@ class UserService(
         
         return UserResponse(
             id = savedUser.id,
+            username = savedUser.username,
             email = savedUser.email,
             firstName = savedUser.firstName,
             lastName = savedUser.lastName,
@@ -136,41 +140,12 @@ class UserService(
         
         return UserResponse(
             id = savedUser.id,
+            username = savedUser.username,
             email = savedUser.email,
             firstName = savedUser.firstName,
             lastName = savedUser.lastName,
             role = savedUser.role,
             isEnabled = savedUser.isEnabled
-        )
-    }
-    
-    @Transactional
-    fun deleteUser(userId: Long) {
-        val user = findById(userId)
-        userRepository.delete(user)
-    }
-    
-    fun getUsersByRole(role: Role, pageable: Pageable): Page<User> {
-        return userRepository.findByRole(role, pageable)
-    }
-    
-    fun searchUsersByEmail(emailPattern: String, pageable: Pageable): Page<User> {
-        return userRepository.findByEmailContainingIgnoreCase(emailPattern, pageable)
-    }
-    
-    fun getUserStatistics(): Map<String, Any> {
-        val totalUsers = userRepository.count()
-        val enabledUsers = userRepository.countByIsEnabled(true)
-        val disabledUsers = userRepository.countByIsEnabled(false)
-        val usersByRole = Role.values().associate { role ->
-            role.name to userRepository.countByRole(role)
-        }
-        
-        return mapOf(
-            "totalUsers" to totalUsers,
-            "enabledUsers" to enabledUsers,
-            "disabledUsers" to disabledUsers,
-            "usersByRole" to usersByRole
         )
     }
 }
