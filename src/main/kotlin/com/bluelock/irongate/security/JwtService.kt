@@ -61,9 +61,11 @@ class JwtService {
             .compact()
     }
 
-    fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
-        val username = extractUsername(token)
-        return (username == userDetails.username) && !isTokenExpired(token)
+//    fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
+    fun isTokenValid(token: String): Boolean {
+//        val username = extractUsername(token)
+//        return (username == userDetails.username) && !isTokenExpired(token)
+        return !isTokenExpired(token)
     }
 
     fun isTokenExpired(token: String): Boolean {
@@ -74,7 +76,7 @@ class JwtService {
         return extractClaim(token, Claims::getExpiration)
     }
 
-    private fun extractAllClaims(token: String): Claims {
+     fun extractAllClaims(token: String): Claims {
         return Jwts.parser()
             .verifyWith(getSignInKey())
             .build()
