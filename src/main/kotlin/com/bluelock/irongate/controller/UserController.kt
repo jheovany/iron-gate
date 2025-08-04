@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 class UserController {
 
     @GetMapping("/profile")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     fun getUserProfile(authentication: Authentication): ResponseEntity<ApiResponse<Map<String, Any>>> {
         val userInfo = mapOf(
             "message" to "Acceso a perfil de usuario",
