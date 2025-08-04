@@ -27,13 +27,15 @@ class AuthController(
     }
 
     @PostMapping("/login")
-    fun authenticate(
+    fun login(
         @Valid @RequestBody request: AuthenticationRequest
     ): ResponseEntity<AuthenticationResponse> {
         return try {
             val response = authenticationService.authenticate(request)
             ResponseEntity.ok(response)
         } catch (e: Exception) {
+            //TODO: Aquí podrías manejar excepciones específicas como BadCredentialsException
+            // o UsernameNotFoundException si es necesario
             ResponseEntity.badRequest().build()
         }
     }
