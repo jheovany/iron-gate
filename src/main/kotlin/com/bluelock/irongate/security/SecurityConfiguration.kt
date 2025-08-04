@@ -20,7 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @EnableWebSecurity
 @EnableMethodSecurity
 class SecurityConfiguration(
-    private val jwtAuthFilter: JwtAuthenticationFilter,
+    private val jwtAuthFilter: JwtAuthFilter,
     private val userDetailsService: UserDetailsServiceImpl,
     private val authenticationEntryPoint: AuthEntryPointImpl,
     private val accessDeniedHandler: AccessDeniedHandlerImpl
