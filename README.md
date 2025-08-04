@@ -1,6 +1,6 @@
 # Iron Gate
 
-Iron Gate is a secure REST API built with Spring Boot and Kotlin that implements JWT authentication and authorization with role-based access control.
+Iron Gate is a secure REST API built with Spring Boot 3.5.4 and Kotlin 1.9.25 that implements JWT authentication and authorization with role-based access control.
 
 ## Features
 
@@ -10,14 +10,16 @@ Iron Gate is a secure REST API built with Spring Boot and Kotlin that implements
 - Token validation and refresh
 - Session management (logout, logout from all devices)
 - PostgreSQL database integration
+- OpenAPI/Swagger documentation
 
 ## Technologies
 
-- **Framework**: Spring Boot
-- **Language**: Kotlin
+- **Framework**: Spring Boot 3.5.4
+- **Language**: Kotlin 1.9.25
 - **Database**: PostgreSQL
 - **Security**: JWT (JSON Web Tokens)
-- **Build Tool**: Gradle
+- **Build Tool**: Gradle 8.6
+- **Documentation**: SpringDoc OpenAPI UI
 
 ## Getting Started
 
@@ -52,6 +54,34 @@ JWT_REFRESH_EXPIRATION=604800000 (optional, default: 7 days in milliseconds)
    ```
    ./gradlew bootRun
    ```
+
+### Docker Deployment
+
+The project includes a multi-stage Dockerfile for containerized deployment:
+
+1. Build the Docker image:
+   ```
+   docker build -t irongate:latest .
+   ```
+2. Run the container with environment variables:
+   ```
+   docker run -p 8080:8080 \
+     -e DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/irongate \
+     -e DATASOURCE_USERNAME=postgres \
+     -e DATASOURCE_PASSWORD=your_password \
+     -e JWT_SECRET_KEY=your_secret_key_at_least_256_bits_long_base64_encoded \
+     irongate:latest
+   ```
+
+## API Documentation
+
+The API is documented using OpenAPI/Swagger. Once the application is running, you can access the interactive API documentation at:
+
+```
+http://localhost:8080/swagger-ui.html
+```
+
+This provides a comprehensive interface to explore and test all available endpoints with detailed request/response schemas.
 
 ## API Endpoints
 
