@@ -3,9 +3,9 @@ spring:
     name: Iron Gate
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/irongate
-    username: ${DB_USERNAME:admin}
-    password: ${DB_PASSWORD:admin123}
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   
   jpa:
@@ -23,7 +23,7 @@ server:
     context-path: /
 
 jwt:
-  secret-key: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  secret-key: ${JWT_SECRET_KEY}
   access-token:
     expiration: ${JWT_EXPIRATION:86400000} # 24 horas en millisegundos
   refresh-token:
