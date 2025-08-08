@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 class AuthController(
     private val authenticationService: AuthService
 ) {
@@ -82,16 +82,16 @@ class AuthController(
         }
     }
 
-    @GetMapping("/me")
+    /*@GetMapping("/me")
     fun getCurrentUser(
         authentication: Authentication
     ): ResponseEntity<UserResponse> {
         val userDetails = authentication.principal as UserDetailsImpl
         val user = userDetails.getUser()
         return ResponseEntity.ok(UserResponse.fromUser(user))
-    }
+    }*/
 
-    @GetMapping("/validate")
+    /*@GetMapping("/validate")
     fun validateToken(
         httpRequest: HttpServletRequest
     ): ResponseEntity<Map<String, Any>> {
@@ -107,5 +107,5 @@ class AuthController(
                 "message" to "Token inválido"
             ))
         }
-    }
+    }*/
 }
