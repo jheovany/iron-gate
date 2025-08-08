@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
@@ -6,8 +8,18 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.25"
 }
 
+val versionProps = Properties()
+file("src/main/resources/version.properties").inputStream().use { versionProps.load(it) }
+val appVersion = versionProps.getProperty("app.version") ?: "0.0.0"
+
 group = "com.bluelock"
-version = "0.0.1-SNAPSHOT"
+version = appVersion
+
+tasks.jar {
+	manifest {
+		attributes["Implementation-Version"] = project.version
+	}
+}
 
 java {
 	toolchain {
