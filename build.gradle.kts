@@ -15,12 +15,6 @@ val appVersion = versionProps.getProperty("app.version") ?: "0.0.0"
 group = "com.bluelock"
 version = appVersion
 
-tasks.jar {
-	manifest {
-		attributes["Implementation-Version"] = project.version
-	}
-}
-
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)

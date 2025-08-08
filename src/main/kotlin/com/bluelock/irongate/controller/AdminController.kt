@@ -4,6 +4,7 @@ import com.bluelock.irongate.dto.ApiResponse
 import com.bluelock.irongate.dto.UserResponse
 import com.bluelock.irongate.entity.Role
 import com.bluelock.irongate.service.UserService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 // TODO: Verify total functionality of this controller
 @RestController
 @RequestMapping("/api/v1/admin")
+@SecurityRequirement(name = "BearerAuth")
 class AdminController(
     private val userService: UserService
 ) {
