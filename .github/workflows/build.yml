@@ -40,11 +40,12 @@ jobs:
           registryUrl: ghcr.io
           registryUsername: ${{ secrets.IRONGATE_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.IRONGATE_REGISTRY_PASSWORD }}
-          containerAppName: iron-gate
+          containerAppName: irongate
           resourceGroup: IronGate
-          imageToBuild: ghcr.io/jheovany/iron-gate:${{ github.sha }}
+          imageToBuild: ghcr.io/jheovany/irongate:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
+
 
 
 
