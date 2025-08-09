@@ -8,7 +8,7 @@ on:
       [ main ]
     paths:
     - '**'
-    - '.github/workflows/iron-gate-AutoDeployTrigger-61e8eaf1-2183-4480-985b-eaaa262f2353.yml'
+    - '.github/workflows/deploy.yml'
 
   # Allow manual trigger 
   workflow_dispatch:      
@@ -40,10 +40,11 @@ jobs:
           registryUrl: ghcr.io
           registryUsername: ${{ secrets.IRONGATE_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.IRONGATE_REGISTRY_PASSWORD }}
-          containerAppName: iron-gate
+          containerAppName: irongate
           resourceGroup: IronGate
-          imageToBuild: ghcr.io/iron-gate:${{ github.sha }}
+          imageToBuild: ghcr.io/jheovany/irongate:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
+
 
 
